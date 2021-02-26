@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    image: joelhoelting/landis-backend
+    volumes:
+      - ./:/app
+    ports:
+      - '3001:3001'

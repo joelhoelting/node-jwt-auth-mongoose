@@ -1,0 +1,106 @@
+swagger: '2.0'
+info:
+  description: API Documentation
+  version: '1.0.0'
+  title: Node Rest API documentation
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: email@email.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+  - https
+paths:
+  /users/signin:
+    post:
+      tags:
+        - Users Module
+      summary: Sign In
+      description: API for Sign In
+      parameters:
+        - in: body
+          name: body
+          description: Sign In Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Sign In Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        400:
+          description: Invalid Fields
+        500:
+          description: Internal Server Error
+  /users/signup:
+    post:
+      tags:
+        - Users Module
+      summary: Sign Up
+      description: API for Sign Up
+      parameters:
+        - in: body
+          name: body
+          description: Sign Up Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Sign Up Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        400:
+          description: Invalid Fields
+        500:
+          description: Internal Server Error
+  /users/validate_token:
+    get:
+      tags:
+        - Users Module
+      summary: Validate Token
+      description: Validates JWT token
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Sign Up Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        400:
+          description: Token is invalid
+        500:
+          description: Internal Server Error
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  ApiResponse:
+    type: object
+    properties:
+      body:
+        type: object
+      message:
+        type: object
+        properties:
+          content:
+            type: string
+          type:
+            type: string
